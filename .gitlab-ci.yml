@@ -1,0 +1,19 @@
+stages:
+  - test
+
+test:
+  stage: test
+  image: ubuntu:latest
+  tags:
+    - linuxrunner
+  script:
+    - apt update
+    - apt install python3 -y
+    - apt install python-virtualenv -y
+    - virtualenv -p python3 .env
+    - source .env/bin/activate
+    - python -m pip install coverage
+    - python -m pip install jinja2
+    - python cover_host.py
+    - coverage run test_cover_host.py
+    - coverage report -m
