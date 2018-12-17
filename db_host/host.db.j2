@@ -1,0 +1,12 @@
+;
+; {{ INPUTFILENAME }} for forward zone from {{ outfile }}.
+;
+$ORIGIN {{ DOMAINNAME }}.
+$TTL 3600
+@       IN      SOA     {{ DOMAINNAME }}.    {{ adminEmailAddress }}.    (
+                        {{ serial }}      ; serial number of this zone file
+                        {{ slaveRefresh }}              ; slave refresh
+                        {{ slaveRetry }}             ; slave retry time in case of a problem
+                        {{ slaveExpiration }}              ; slave expiration time
+                        {{ maximumCaching }}              ; maximum caching time in case of failed lookups
+                        )

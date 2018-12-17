@@ -12,15 +12,22 @@ from datetime import datetime
 
 DEBUGMODE = True
 
+
+def debug_output_dir(debug):
+    if debug:
+        return os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), 'working')
+    else:
+        # For CentOS adn redhat bind home dir is "/etc/named/"
+        return os.path.join(os.sep, 'etc', 'named')
+
+
 SOURCE_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), 'host')
 DB_SOURCE_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), 'db_host')
-OUTPUT_HOST = settings.debug_output_host(DEBUGMODE, VMDOMAIN)
-OUTPUT_DIR = settings.debug_output_dir(DEBUGMODE)
-OUTPUT_DB = settings.debug_output_db(DEBUGMODE)
-FILELIST = settings.debug_file_list(VMDOMAIN)
-HOSTDBLIST = settings.debug_hostdb_list(VMDOMAIN)
+OUTPUT_DIR = debug_output_dir(DEBUGMODE)
+HOSTDBLIST = settings.domainList
 
 
 def check_file_exist(filename, serial):
